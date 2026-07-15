@@ -1,0 +1,9 @@
+.env
+python/tests/
+chats/
+telethon/
+database/
+support/
+tic_tac_toe/
+fixtures/alert.png
+fixtures/alert.webp
