@@ -2,7 +2,7 @@ import json
 import sqlite3
 import os
 
-from config.config import bot,my_id,chat_id_pumba,db_path
+from config.config import bot,MY_ID,ADMIN_CHAT_ID,db_path
 from misc.support import page_start_admin
 from misc.hello_buy import load_data_all
 from misc.swear import load_data_word
@@ -24,7 +24,7 @@ async def forward_send_message(event):
 
 		if event.text:
 			user = await bot.get_entity(event.sender_id)
-			await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАПУСТИВ РОЗСИЛКУ</u> повідомлення:\n\n<i>{event.text}</i>", parse_mode = 'html')
+			await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАПУСТИВ РОЗСИЛКУ</u> повідомлення:\n\n<i>{event.text}</i>", parse_mode = 'html')
 
 			try:
 				all_chats = await load_data_all()
@@ -67,7 +67,7 @@ async def answer_message(event):
 			await bot.send_message(event.chat.id, "Відповідь було відправлено😈", buttons=await page_start_admin())
 
 			user = await bot.get_entity(event.sender_id)
-			await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ВІДПОВІВ КОРИСТУВАЧУ</u> <i>{str(idd)}</i> повідомленням:\n\n<i>{event.text[11:]}</i>", parse_mode = 'html')
+			await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ВІДПОВІВ КОРИСТУВАЧУ</u> <i>{str(idd)}</i> повідомленням:\n\n<i>{event.text[11:]}</i>", parse_mode = 'html')
 
 			return
 		except:
@@ -94,37 +94,37 @@ async def load_data_adm():
 # Registration of admins
 async def register_admin_real(event):
 	admins = await load_data_adm()
-	if event.chat.id == my_id:
+	if event.chat.id == MY_ID:
 		try:
 			id_new = int(event.text[16:])
 			if id_new not in admins:
 				admins.append(id_new)
 				await save_data_adm(admins)
-				await bot.send_message(my_id, "Нового адміна зареєстровано😈!")
+				await bot.send_message(MY_ID, "Нового адміна зареєстровано😈!")
 				
-				await bot.send_message(chat_id_pumba, f"Адмін <b>Максімка</b> <u>ЗАРЕЄСТРУВАВ</u> нового адміністратора - <i>{id_new}</i>", parse_mode = 'html')
+				await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>Максімка</b> <u>ЗАРЕЄСТРУВАВ</u> нового адміністратора - <i>{id_new}</i>", parse_mode = 'html')
 			else:
-				await bot.send_message(my_id, "Цей адмін вже зареєстрований😈!")
+				await bot.send_message(MY_ID, "Цей адмін вже зареєстрований😈!")
 		except:
-			await bot.send_message(my_id, "Щось пішло не так👿!")
+			await bot.send_message(MY_ID, "Щось пішло не так👿!")
 	return
 
 # Removing admins
 async def delate_admin_real(event):
 	admins = await load_data_adm()
-	if event.chat.id == my_id:
+	if event.chat.id == MY_ID:
 		try:
 			id_new = int(event.text[14:])
 			if id_new in admins:
 				admins.remove(id_new)
 				await save_data_adm(admins)
-				await bot.send_message(my_id, "Адміна було видалено😈!")
+				await bot.send_message(MY_ID, "Адміна було видалено😈!")
 				
-				await bot.send_message(chat_id_pumba, f"Адмін <b>Максімка</b> <u>ВИДАЛИВ</u> адміністратора - <i>{id_new}</i>", parse_mode = 'html')
+				await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>Максімка</b> <u>ВИДАЛИВ</u> адміністратора - <i>{id_new}</i>", parse_mode = 'html')
 			else:
-				await bot.send_message(my_id, "Цієї людини і не було в адмінах😈!")
+				await bot.send_message(MY_ID, "Цієї людини і не було в адмінах😈!")
 		except:
-			await bot.send_message(my_id, "Щось пішло не так👿!")
+			await bot.send_message(MY_ID, "Щось пішло не так👿!")
 	return
 
 # Admin message
@@ -229,7 +229,7 @@ async def register_word(event):
 			await event.reply(f'Тригер разом з відповіддю було зареєстровано:\n\n <b>{word}</b> - <i>{response}</i>', parse_mode = 'html')
 
 			user = await bot.get_entity(event.sender_id)
-			await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАРЕЄСТРУВАВ</u> слово з відповіддю:\n\n<b>{word}</b> - <i>{response}</i>", parse_mode = 'html')
+			await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАРЕЄСТРУВАВ</u> слово з відповіддю:\n\n<b>{word}</b> - <i>{response}</i>", parse_mode = 'html')
 		else:
 			await event.reply('<b>Неправильний формат команди</b>.\n<i>(Приклад застосування: \"/register_word да - пізда\")</i>', parse_mode = 'html')
 
@@ -246,7 +246,7 @@ async def delete_word(event):
 				await event.reply(f'Слово <i>"{word_to_delete}"</i> <u>ВИДАЛЕНО</u>!', parse_mode = 'html')
 
 				user = await bot.get_entity(event.sender_id)
-				await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ВИДАЛИВ</u> тригер <i><b>\"{word_to_delete}\"</b></i> разом з відповіддю.", parse_mode = 'html')
+				await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ВИДАЛИВ</u> тригер <i><b>\"{word_to_delete}\"</b></i> разом з відповіддю.", parse_mode = 'html')
 			else:
 				await event.reply(f'Слово <i>"{word_to_delete}"</i> не було зареєстровано.', parse_mode = 'html')
 		except:
@@ -306,7 +306,7 @@ async def ban_user(event):
 				await bot.send_message(event.chat.id, f"Користувача <i>{id_ban}</i> <b>забанено😈!</b>", parse_mode = 'html')
 				
 				user = await bot.get_entity(event.sender_id)
-				await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАБАНИВ</u> користувача: <i><b>{id_ban}</b></i>", parse_mode = 'html')
+				await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>ЗАБАНИВ</u> користувача: <i><b>{id_ban}</b></i>", parse_mode = 'html')
 			else:
 				await bot.send_message(event.chat.id, f"Користувач <i>{id_ban}</i> вже був <b>забанений раніше😈!</b>", parse_mode = 'html')
 		except:
@@ -326,7 +326,7 @@ async def unban_user(event):
 				await bot.send_message(event.chat.id, f"Користувача <i>{id_ban}</i> <b>розбанено😈!</b>", parse_mode = 'html')
 
 				user = await bot.get_entity(event.sender_id)
-				await bot.send_message(chat_id_pumba, f"Адмін <b>{user.first_name} ({user.id})</b> <u>РОЗБАНИВ</u> користувача: <i><b>{id_ban}</b></i>", parse_mode = 'html')
+				await bot.send_message(ADMIN_CHAT_ID, f"Адмін <b>{user.first_name} ({user.id})</b> <u>РОЗБАНИВ</u> користувача: <i><b>{id_ban}</b></i>", parse_mode = 'html')
 			else:
 				await bot.send_message(event.chat.id, f"Користувач <i>{id_ban}</i> <b>не був в бані😈!</b>", parse_mode = 'html')
 		except:

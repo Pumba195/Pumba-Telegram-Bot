@@ -10,7 +10,7 @@ from telethon.tl.types import ReplyInlineMarkup, KeyboardButtonRow, KeyboardButt
 from telethon import Button
 from misc.swear import load_data_word
 from misc.support import page_start,page_start_admin
-from config.config import bot,chat_id_ss,my_id,chat_id_pumba,chat_id_souz,chat_id_answars
+from config.config import bot,MY_ID,ADMIN_CHAT_ID
 from misc.admin_func import load_data_adm,load_data_ban
 from rates.rates_of_crypto import Currency_bit
 from rates.rates_of_currency import Currency
@@ -32,12 +32,10 @@ async def send_start(event):
 	user = await bot.get_entity(event.sender_id)
 	admins = await load_data_adm()
 	if event.chat.id in admins:
-		await bot.send_message(chat_id_answars, f'{event.chat.id}', parse_mode = 'html')
 		await bot.send_message(event.chat.id, f'Добрий день😈, <b>{user.first_name}</b>! Цей бот розроблений здебільшого для спільних чатів, тому не гальмуй і додавай його до всіх груп😏. Детальніша інформація про функціонал бота — <b>\"/info\"</b>', parse_mode = 'html', buttons=await page_start_admin())
 		return
 
 	if event.chat_id > 0:
-		await bot.send_message(chat_id_answars, f'{event.chat.id}', parse_mode = 'html')
 		await bot.send_message(event.chat.id, f'Добрий день, <b>{user.first_name}</b>! Цей бот розроблений здебільшого для спільних чатів, тому не гальмуй і додавай його до всіх груп😏. Детальніша інформація про функціонал бота — <b>\"/info\"</b>', parse_mode = 'html', buttons=await page_start())
 		return
 
@@ -295,10 +293,6 @@ async def excel_realized(event):
 
 
 # ---------------------------- Time message ----------------------------
-
-#SS	
-async def send_silence_message():
-	await bot.send_message(chat_id_ss, "ПОЗАКРИВАЛИ ПИЗДАКИ! Хвилина мовчання...")
 
 
 

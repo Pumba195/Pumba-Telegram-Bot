@@ -8,24 +8,21 @@ from pyowm import OWM
 load_dotenv()
 
 # OpenWeatherMap API key
-owm = OWM(os.getenv('OWM_API_KEY'))
+OWM_API = OWM(os.getenv('OWM_API_KEY'))
 
 # Telegram API credentials
 API_ID = int(os.getenv('API_ID'))
 API_HASH = os.getenv('API_HASH')
 
 # Telegram Bot credentials
-Pumba = int(os.getenv('PUMBA_BOT_ID'))
+BOT_ID = int(os.getenv('BOT_ID'))
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 #  Your personal Telegram account ID
-my_id = int(os.getenv('MY_ID'))
+MY_ID = int(os.getenv('MY_ID'))
 
 # Chat and channel IDs
-chat_id_pumba = int(os.getenv('CHAT_ID_PUMBA'))
-chat_id_souz = int(os.getenv('CHAT_ID_SOUZ'))
-chat_id_ss = int(os.getenv('CHAT_ID_SS'))
-chat_id_answars = int(os.getenv('CHAT_ID_ANSWARS'))
+ADMIN_CHAT_ID = int(os.getenv('ADMIN_CHAT_ID'))
 
 # Path to database
 directory = 'database'

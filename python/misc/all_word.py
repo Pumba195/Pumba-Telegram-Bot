@@ -3,7 +3,7 @@ import sqlite3
 from telethon import types
 import os
 
-from config.config import bot,my_id,chat_id_souz,Pumba,chat_id_pumba, db_path
+from config.config import bot,MY_ID,BOT_ID,ADMIN_CHAT_ID, db_path
 from misc.support import handle_support,page_support_back,page_start,page_start_admin
 from misc.weather import send_weather_srazu, send_weather_katowice
 from misc.swear import load_data_word
@@ -176,7 +176,7 @@ async def all_message(event,events):
 			# 	return
 				
 			if message_text == 'катовице' or message_text == 'катовіце' or message_text == 'katowice' or message_text == 'като':
-				if event.chat_id == chat_id_pumba:
+				if event.chat_id == ADMIN_CHAT_ID:
 					await send_weather_katowice(event)
 					return
 

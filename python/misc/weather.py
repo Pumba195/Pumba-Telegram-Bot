@@ -1,7 +1,7 @@
 import json
 import os
 
-from config.config import bot,owm
+from config.config import bot,OWM_API
 from telethon.tl.types import ReplyInlineMarkup, KeyboardButtonRow, KeyboardButtonCallback
 
 
@@ -179,7 +179,7 @@ async def send_weather_srazu(event):
 
 # Weather continue
 async def send_weather_city_srazu(event,city,place):
-	mgr = owm.weather_manager()
+	mgr = OWM_API.weather_manager()
 	observation = mgr.weather_at_place(place)
 	w = observation.weather
 	temper = w.temperature('celsius')['temp']
@@ -204,7 +204,7 @@ async def send_weather_city_srazu(event,city,place):
 
 # Send weather after click
 async def send_weather_city(event,city,place):
-	mgr = owm.weather_manager()
+	mgr = OWM_API.weather_manager()
 	observation = mgr.weather_at_place(place)
 	w = observation.weather
 	temper = w.temperature('celsius')['temp']
@@ -275,7 +275,7 @@ async def weather_ua(weather):
 
 # Weather Katowice
 async def send_weather_katowice(event):
-	mgr = owm.weather_manager()
+	mgr = OWM_API.weather_manager()
 	observation = mgr.weather_at_place("Katowice, PL")
 	w = observation.weather
 	temper = w.temperature('celsius')['temp']

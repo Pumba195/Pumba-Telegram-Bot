@@ -24,7 +24,7 @@ from misc.birthday import birthday_real,birthday_time
 from misc.hello_buy import welcome_new_members,goodbye_member
 from misc.all_rates import send_rates,send_crypto,send_petrol
 from misc.other_func import send_rnumb,send_rcoin,send_alert,gruz200,send_info,send_callall_message,send_start,excel_realized
-from misc.other_func import send_random_user,send_silence_message
+from misc.other_func import send_random_user
 from misc.all_word import all_message
 from misc.admin_func import register_admin_real,delate_admin_real,admin_panel,admin_info_real,all_chats_real,register_word,delete_word,list_words,ban_user,unban_user,ban_user_list,enabled_chats_real
 # from misc.other_func import send_schedule_0830,send_schedule_1000,send_schedule_1200,send_schedule_1330
@@ -262,9 +262,6 @@ async def all_message_command(event):
 
 # ---------------------------- Time message ----------------------------
 async def main():
-	#SS	
-	schedule.every().day.at("09:00").do(lambda: asyncio.create_task(send_silence_message()))
-
 	#Schedule
 	# schedule.every().day.at("08:30").do(lambda: asyncio.create_task(send_schedule_0830()))
 	# schedule.every().day.at("10:00").do(lambda: asyncio.create_task(send_schedule_1000()))

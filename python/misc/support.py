@@ -1,7 +1,7 @@
 import json
 
 from telethon.tl.types import ReplyKeyboardMarkup, KeyboardButtonRow, KeyboardButton
-from config.config import bot,chat_id_pumba,my_id
+from config.config import bot,ADMIN_CHAT_ID,MY_ID
 
 
 
@@ -20,13 +20,13 @@ async def handle_support(event):
 	if event.chat_id > 0:
 		user = await bot.get_entity(event.sender_id)
 
-		await bot.send_message(chat_id_pumba, f"<b>Зворотній зв`язок від користувача:</b>\n\n\
+		await bot.send_message(ADMIN_CHAT_ID, f"<b>Зворотній зв`язок від користувача:</b>\n\n\
 <b>Ім`я:</b> <i>{user.first_name}</i>\n\
 <b>Тег:</b> <i>@{user.username}</i>\n\
 <b>ID:</b> <i>{user.id}</i>\n\n\
 <i>Повідомлення:</i>", parse_mode = 'html')
 		
-		await bot.forward_messages(chat_id_pumba, event._message_id, event.chat.id)
+		await bot.forward_messages(ADMIN_CHAT_ID, event._message_id, event.chat.id)
 
 		try:
 			with open('support/admins.json', 'r') as f:

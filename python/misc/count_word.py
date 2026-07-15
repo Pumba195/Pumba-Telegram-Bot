@@ -1,5 +1,5 @@
 import json
-from config.config import bot,Pumba
+from config.config import bot,BOT_ID
 import os
 
 

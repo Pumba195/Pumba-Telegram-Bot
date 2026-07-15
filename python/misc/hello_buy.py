@@ -3,7 +3,7 @@ import os
 
 from misc.weather import save_data_weather,load_data_weather
 from misc.swear import save_data_word,load_data_word
-from config.config import Pumba,bot
+from config.config import BOT_ID,bot
 
 
 
@@ -33,7 +33,7 @@ async def welcome_new_members(event):
 	os.makedirs(directory, exist_ok=True) 
 	chat = f'{directory}/{event.chat_id}.json'
 
-	if new_member.id == Pumba:
+	if new_member.id == BOT_ID:
 
 		all_chats = await load_data_all()
 		chat_id = event.chat_id
@@ -135,7 +135,7 @@ async def goodbye_member(event):
 
 	left_chat_member = event.user
 
-	if left_chat_member.id == Pumba:
+	if left_chat_member.id == BOT_ID:
 		enabled_chats = await load_data_word()
 		weather_chats = await load_data_weather()
 		all_chats = await load_data_all()
